@@ -10,7 +10,7 @@ const applicationReducers = combineReducers({
 
 const initialState = {}
 
-const middleware = [thunk]
+const middleware = [thunk];
 
 export const store = createStore(
     applicationReducers,
