@@ -1,20 +1,25 @@
 import React,{useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { AddTodoAction } from './actions/TodoAction';
+import { AddTodoAction, RemoveTodoAction } from './actions/TodoAction';
 
 const App = () => {
 
   const [todo, setTodo] = useState();
 
      const dispatch = useDispatch();
-    const Todo = useSelector((state) => state.Todo);
-    const { todos } = Todo;
+     const Todo = useSelector((state) => state.Todo);
+     const { todos } = Todo;
 
     
 
     const handleSubmit=(e)=>{
      e.preventDefault();
      dispatch(AddTodoAction(todo));
+   }
+
+   const removeTodoHandler=(t)=>{
+     dispatch(RemoveTodoAction(t))
+
    }
 
 
@@ -59,7 +64,7 @@ const App = () => {
                 borderRadius:30,
                 color:"#fff",
                 background:"#f00"
-              }}>Delete</button>
+              }} onClick={() => removeTodoHandler(t)}>Delete</button>
            </li>
             ))
           }

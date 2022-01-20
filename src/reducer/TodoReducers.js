@@ -1,4 +1,3 @@
-
 export const TodoReducer = (state = {todos:[]}, action) => {
      switch (action.type) {
         case "ADD_TO_DO":
