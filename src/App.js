@@ -1,25 +1,71 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { AddTodoAction } from './actions/TodoAction';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+
+  const [todo, setTodo] = useState();
+
+     const dispatch = useDispatch();
+    const Todo = useSelector((state) => state.Todo);
+    const { todos } = Todo;
+
+    
+
+    const handleSubmit=(e)=>{
+     e.preventDefault();
+     dispatch(AddTodoAction(todo));
+   }
+
+
+  return <> 
+      <div className='App'>
+        <h1>To Do redux app</h1>
+       
+      </div>
+       <form onSubmit={handleSubmit}>
+            <input placeholder='Enter Todo' style={{
+              width:"350px",
+              padding:20,
+              margin:20,
+              borderRadius:10,
+              background:"#fff",
+              color:"black",
+              outline:"none",
+              fontSize:20
+            }} onChange={(e) => setTodo(e.target.value)} />
+            <button style={{
+              padding: 12,
+              marginLeft:20,
+              borderRadius:25,
+              cursor:"pointer"
+            }} type='submi'>Submit</button>
+        </form>
+      
+        <br/> 
+        <br/>
+
+        <ul style={{
+          padding:20,
+          margin:15
+        }}>
+
+          {todos && todos.map((t) => ( 
+               <li key={t.id}>
+               <span>{t.todo}</span>
+                <button style={{
+                padding:10,
+                marginLeft:10,
+                borderRadius:30,
+                color:"#fff",
+                background:"#f00"
+              }}>Delete</button>
+           </li>
+            ))
+          }
+         
+        </ul>
+</>
+};
 
 export default App;
